@@ -59,9 +59,9 @@ def move():
         if up == 0 and right == 0:
             continue
         elif up == 0:
-            right = right * movement * 1.414
+            right = right * movement
         elif right == 0:
-            up = up * movement * 1.414
+            up = up * movement
         else:
             degree = random.randint(1, 89)
             radian = math.pi * degree * 2 / 360

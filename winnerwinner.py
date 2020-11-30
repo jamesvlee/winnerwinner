@@ -185,12 +185,13 @@ while True:
                 m['dir']['right'] = 0
         redx, redy = models['red']['point']
         bluex, bluey = models['blue']['point']
-        if not fly_warning and math.sqrt(abs(redx - bluex) ** 2 + abs(redy - bluey) ** 2) <= (models['red']['radius'] + around) * 2:
+        spacing = math.sqrt(abs(redx - bluex) ** 2 + abs(redy - bluey) ** 2)
+        if not fly_warning and spacing <= (models['red']['radius'] + around) * 2:
             fly_warning = True
             for k, m in models.items():
                 m['dir']['up'] = -m['dir']['up']
                 m['dir']['right'] = -m['dir']['right']
-        else:
+        elif fly_warning and spacing > (models['red']['radius'] + around) * 2:
             fly_warning = False
         # all flying to new points
         for c, m in models.items():

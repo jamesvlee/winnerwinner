@@ -161,7 +161,10 @@ while True:
         surf.fill(BLACK)
         # change directions
         loop += 1
-        if not fly_warning and loop >= max_loop and roll() > 2:
+        redx, redy = models['red']['point']
+        bluex, bluey = models['blue']['point']
+        spacing = math.sqrt(abs(redx - bluex) ** 2 + abs(redy - bluey) ** 2)
+        if spacing > (models['red']['radius'] + around) * 2 and loop >= max_loop and roll() > 2:
             for k, m in models.items():
                 up, right = move()
                 m['dir']['up'] = up
@@ -183,9 +186,6 @@ while True:
             elif y >= surf_height - m['radius'] - border:
                 m['dir']['up'] = movement
                 m['dir']['right'] = 0
-        redx, redy = models['red']['point']
-        bluex, bluey = models['blue']['point']
-        spacing = math.sqrt(abs(redx - bluex) ** 2 + abs(redy - bluey) ** 2)
         if not fly_warning and spacing <= (models['red']['radius'] + around) * 2:
             fly_warning = True
             for k, m in models.items():
